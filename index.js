@@ -90,20 +90,36 @@ async function main() {
   //   }
   // })
 
-  const newUser = await prisma.user.create({
-    data: {
-      name: "María",
-      email: "maria@gmail.com",
-      post: {
-        create: {
-          title: "Second post",
-          content: "This is the second post"
-        }
-      }
+  // const newUser = await prisma.user.create({
+  //   data: {
+  //     name: "María",
+  //     email: "maria@gmail.com",
+  //     post: {
+  //       create: {
+  //         title: "Second post",
+  //         content: "This is the second post"
+  //       }
+  //     }
+  //   }
+  // })
+
+  /* -------------------------------------------------------------------------- */
+
+  const users = await prisma.user.findMany({
+    include: {
+      post: true
     }
   })
 
-  console.log(newUser)
+  users.forEach((user) => {
+    console.log("-------------")
+    console.log(`User: ${user.name}`)
+
+    user.post.forEach((post, i) => {
+      console.log(`${i} Title:${post.title}`)
+    })
+  })
+  //  console.log(users)
 }
 
 main()
