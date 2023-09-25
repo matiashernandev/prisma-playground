@@ -58,15 +58,52 @@ async function main() {
 
   /* ---------------------------- UPDATE OR CREATE ---------------------------- */
 
-  const user = await prisma.user.upsert({
-    where: {
-      id: 55,
-    },
-    create: { email: "julia@gmail2.com", name: "Julia" },
-    update: { lastname: "Das Biaggio2" },
+  // const user = await prisma.user.upsert({
+  //   where: {
+  //     id: 55,
+  //   },
+  //   create: { email: "julia@gmail2.com", name: "Julia" },
+  //   update: { lastname: "Das Biaggio2" },
+  // })
+
+  // console.log(user)
+
+  /* -------------------------------------------------------------------------- */
+
+  // const newUser = await prisma.user.create({
+  //   data: {
+  //     name: "Emmanuel2",
+  //     email: "emmanuel2@gmail.com"
+  //   }
+  // })
+
+  // const newPost = await prisma.post.create({
+  //   data: {
+  //     title: "First post",
+  //     content: "This is the first post",
+  //     // author: {
+  //     //   connect: {
+  //     //     id: newUser.id
+  //     //   }
+  //     // }
+  //     authorId: newUser.id
+  //   }
+  // })
+
+  const newUser = await prisma.user.create({
+    data: {
+      name: "María",
+      email: "maria@gmail.com",
+      post: {
+        create: {
+          title: "Second post",
+          content: "This is the second post"
+        }
+      }
+    }
   })
 
-  console.log(user)
+  console.log(newUser)
 }
 
 main()
