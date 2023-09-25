@@ -10,8 +10,13 @@ async function main() {
   //   },
   // })
   // console.log(newUser)
-  //const users = await prisma.user.findMany()
+
   /* -------------------------------------------------------------------------- */
+
+  //const users = await prisma.user.findMany()
+
+  /* -------------------------------------------------------------------------- */
+
   // const user = await prisma.user.findFirst({
   //   where: {
   //     //name: "Mati",
@@ -23,7 +28,9 @@ async function main() {
   //     ],
   //   },
   // })
+
   /* -------------------------------------------------------------------------- */
+
   //   try {
   //     const user = await prisma.user.delete({
   //       where: {
@@ -37,6 +44,19 @@ async function main() {
   //     }
   //     console.error(error.message)
   //   }
+
+  const users = await prisma.user.findMany()
+
+  const updatedUser = await prisma.user.update({
+    where: {
+      id: 5,
+    },
+    data: {
+      lastname: "Biaggio",
+    },
+  })
+
+  console.log(users)
 }
 
 main()
