@@ -11,9 +11,22 @@ async function main() {
   // })
   // console.log(newUser)
 
-  const users = await prisma.user.findMany()
+  //const users = await prisma.user.findMany()
 
-  console.log(users)
+  const user = await prisma.user.findFirst({
+    where: {
+      //name: "Mati",
+
+      OR: [
+        {
+          id: 55,
+        },
+        { email: "mati@gmail.com" },
+      ],
+    },
+  })
+
+  console.log(user)
 }
 
 main()
