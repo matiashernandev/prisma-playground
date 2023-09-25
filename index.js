@@ -45,18 +45,28 @@ async function main() {
   //     console.error(error.message)
   //   }
 
-  const users = await prisma.user.findMany()
+  /* -------------------------------------------------------------------------- */
 
-  const updatedUser = await prisma.user.update({
+  // const updatedUser = await prisma.user.update({
+  //   where: {
+  //     id: 5,
+  //   },
+  //   data: {
+  //     lastname: "Biaggio",
+  //   },
+  // })
+
+  /* ---------------------------- UPDATE OR CREATE ---------------------------- */
+
+  const user = await prisma.user.upsert({
     where: {
-      id: 5,
+      id: 55,
     },
-    data: {
-      lastname: "Biaggio",
-    },
+    create: { email: "julia@gmail2.com", name: "Julia" },
+    update: { lastname: "Das Biaggio2" },
   })
 
-  console.log(users)
+  console.log(user)
 }
 
 main()
